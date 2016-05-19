@@ -1,3 +1,4 @@
+'use strict';
 var bio = {
     "name": "Jacobo Hernandez",
     "role": "Front End Ninja",
@@ -11,7 +12,7 @@ var bio = {
     "skills": [
         "HTML", "CSS", "JavaScript", "JQuery", "JSAngular"
     ],
-    "bioPic": "images/fry.jpg",
+    "biopic": "images/fry.jpg",
     display: function() {
         $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
         $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
@@ -19,7 +20,7 @@ var bio = {
         $("#topContacts, #footerContacts").append(HTMLemail.replace("%data%", bio.contact.email));
         $("#topContacts, #footerContacts").append(HTMLgithub.replace("%data%", bio.contact.github));
         $("#topContacts, #footerContacts").append(HTMLlocation.replace("%data%", bio.contact.location));
-        $("#header").append(HTMLbioPic.replace("%data%", bio.bioPic));
+        $("#header").append(HTMLbioPic.replace("%data%", bio.biopic));
         $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
         $("#header").append(HTMLskillsStart);
         bio.skills.forEach(function (skill) {
@@ -34,7 +35,7 @@ var education = {
             "name": "Sanford Brown College",
             "location": "Milwaukee, WI",
             "degree": "Associate's Degree",
-            "major": [
+            "majors": [
                 "Medical Technician"
             ],
             "dates": "2010 - 2012",
@@ -49,16 +50,14 @@ var education = {
             "url": "www.udacity.com"
         }
     ],
-    displaySchools: function () {
+    display: function() {
         for (var school in education.schools) {
             $("#education").append(HTMLschoolStart);
             $(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[school].name) + HTMLschoolDegree.replace("%data%", education.schools[school].degree));
             $(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[school].dates));
             $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[school].location));
-            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[school].major));
-        }
-    },
-    displayOnlineCourses: function () {
+            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[school].majors));
+        };
         for (var course in education.onlineCourses) {
             $("#education").append(HTMLonlineClasses);
             $("#education").append(HTMLschoolStart);
@@ -127,8 +126,7 @@ $("#mapDiv").append(googleMap);
 bio.display();
 work.display();
 projects.display();
-education.displaySchools();
-education.displayOnlineCourses();
+education.display();
 
 // This is used with console.log to show an array of locations you have worked based on the JSON you have created! Pretty neat huh? :)
 function locationizer(work_obj) {
